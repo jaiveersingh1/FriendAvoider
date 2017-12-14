@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">NearbyDevices</string>
+    <string name="app_name">FriendAvoider</string>
 
-    <string name="discover_nearby_devices">Discover nearby devices</string>
-    <string name="share_device_information">Share device information</string>
+    <string name="discover_nearby_devices">Discover nearby friends</string>
+    <string name="share_device_information">Avoid me!</string>
     <string name="title_activity_maps">Map</string>
 </resources>

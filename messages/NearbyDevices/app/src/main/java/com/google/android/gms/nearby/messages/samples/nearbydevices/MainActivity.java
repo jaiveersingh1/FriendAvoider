@@ -125,6 +125,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         setContentView(R.layout.activity_main);
         mSubscribeSwitch = (SwitchCompat) findViewById(R.id.subscribe_switch);
         mPublishSwitch = (SwitchCompat) findViewById(R.id.publish_switch);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "just before perms");
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+            Log.d(TAG, "supposedly we got perms");
+        }
 
         // Build the message that is going to be published. This contains the device name and a
         // UUID.
@@ -268,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     public void onResult(@NonNull Status status) {
                         if (status.isSuccess()) {
                             Log.i(TAG, "Subscribed successfully.");
-                            logAndShowSnackbar("We done it boyzzz");
+                            logAndShowSnackbar("Searching for friends to avoid...");
                         } else {
                             logAndShowSnackbar("Could not subscribe, status = " + status);
                             mSubscribeSwitch.setChecked(false);
@@ -346,14 +351,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
      * @return the last know best location
      */
     public Location getLastBestLocation() {
-        Location locationGPS;
-        Location locationNet;
+        Location locationGPS = null;
+        Location locationNet = null;
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationGPS = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            locationNet = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        } else {
-            locationGPS = null;
-            locationNet = null;
+
+            //locationGPS = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            //locationNet = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            //Log.d(TAG, locationGPS.toString() + "bob oh no");
         }
 
         long GPSLocationTime = 0;

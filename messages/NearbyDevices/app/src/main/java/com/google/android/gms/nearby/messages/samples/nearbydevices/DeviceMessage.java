@@ -45,7 +45,7 @@ public class DeviceMessage {
             mMessageBody = location.toString();
         }
         else {
-            mMessageBody = "sorry we had a null";
+            mMessageBody = "Oh no, friend " + uuid +" is nearby!";
         }
 
 
